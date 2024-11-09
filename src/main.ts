@@ -1,3 +1,4 @@
+import "dotenv/config";
 import mineflayer from "mineflayer";
 import plasmo from "./index";
 
@@ -5,10 +6,10 @@ class Bot {
 	bot: mineflayer.Bot;
 	constructor(name: string) {
 		this.bot = mineflayer.createBot({
-			host: "localhost",
+			host: process.env.HOST,
 			username: name,
 			auth: "offline",
-			port: 25565,
+			port: parseInt(process.env.PORT || "25565"),
 			version: "1.19.4",
 		});
 

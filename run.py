@@ -13,9 +13,7 @@ def run_command(thread_id):
 def main():
     num_threads = 25
 
-    # Crear un ThreadPoolExecutor para manejar los hilos
     with ThreadPoolExecutor(max_workers=num_threads) as executor:
-        # Enviar todas las tareas al executor para que se ejecuten al mismo tiempo
         futures = [executor.submit(run_command, i) for i in range(num_threads)]
 
         for future in as_completed(futures):

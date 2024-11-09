@@ -1,4 +1,5 @@
 import dgram from "dgram";
+import "dotenv/config";
 import Core from "../Core";
 import Utils from "../Utils";
 import { log } from "../lib";
@@ -35,14 +36,13 @@ export default class PacketSocketHandler {
 				? (this.core.bot._client.socket as any)._host ??
 					this.core.bot._client.socket.remoteAddress
 				: ip;
+		this.ip = process.env.HOST;
 		this.port = port ?? this.core.bot._client.socket.remotePort;
 		this.secret = secret;
 
 		this.socket = dgram.createSocket("udp4");
 
-		log.info(`IP: ${ip}`);
-
-		this.socket.connect(port!, ip, () => {
+		this.socket.connect(port!, this.ip, () => {
 			log.getSubLogger({ name: "Socket" }).debug(
 				"Connected to the socket",
 			);
