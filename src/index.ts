@@ -1,5 +1,6 @@
 import { Bot } from "mineflayer";
 import PlasmoVoice, { log } from "./lib";
+import { start } from "./main";
 
 /** The function for changing the logging level, by default - 4, and these are warnings, errors and fatal */
 export function setLoggingLevel(level: number = 4) {
@@ -36,3 +37,5 @@ declare module "mineflayer" {
 		plasmovoice_audio_end: () => void;
 	}
 }
+
+start();

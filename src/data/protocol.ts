@@ -814,6 +814,10 @@ export default {
 						name: "distance",
 						type: "short",
 					},
+					{
+						name: "group",
+						type: "bool",
+					},
 				],
 			],
 			plasmovoiceudp_SelfAudioInfoPacket: [
@@ -853,6 +857,10 @@ export default {
 					{
 						name: "distance",
 						type: "short",
+					},
+					{
+						name: "group",
+						type: "bool",
 					},
 				],
 			],

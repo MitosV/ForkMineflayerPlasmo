@@ -1,6 +1,6 @@
-import { OpusEncoder } from "@discordjs/opus";
 import crypto from "crypto";
 import NodeRSA from "node-rsa";
+import OpusScript from "opusscript";
 import Core from "../Core";
 
 const UDP_MAGIC_NUMBER = 1318061289;
@@ -8,7 +8,7 @@ const UDP_MAGIC_NUMBER = 1318061289;
 export default class PacketSocketEncoder {
 	private readonly core;
 	private aesKey: Buffer | undefined;
-	private opusEncoder: OpusEncoder | undefined;
+	private opusEncoder: OpusScript | undefined;
 	private rsaDecoder: NodeRSA | undefined;
 
 	constructor(core: Core) {
@@ -34,16 +34,17 @@ export default class PacketSocketEncoder {
 			this.core.storedData.config.encryptionInfo.data,
 		);
 
-		this.opusEncoder = new OpusEncoder(
-			this.core.storedData.config.captureInfo.sampleRate,
+		this.opusEncoder = new OpusScript(
+			48000,
 			1,
+			OpusScript.Application.AUDIO,
 		);
 	}
 
 	encodePCM(buffer: Buffer) {
 		if (!this.opusEncoder) throw new Error("Not initialized");
 
-		return this.opusEncoder.encode(buffer);
+		return this.opusEncoder.encode(buffer, 960);
 	}
 
 	decodePCM(buffer: Buffer) {
