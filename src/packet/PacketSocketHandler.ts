@@ -40,6 +40,8 @@ export default class PacketSocketHandler {
 
 		this.socket = dgram.createSocket("udp4");
 
+		log.info(`IP: ${ip}`);
+
 		this.socket.connect(port!, ip, () => {
 			log.getSubLogger({ name: "Socket" }).debug(
 				"Connected to the socket",

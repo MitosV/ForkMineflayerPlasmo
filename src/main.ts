@@ -18,6 +18,7 @@ class Bot {
 	initBot() {
 		this.bot.loadPlugin(plasmo.plugin);
 
+		plasmo.setLoggingLevel(0);
 		/** By default - 4, and these are warnings, errors and fatal errors */
 
 		this.bot.on("plasmovoice_connected", () => {
